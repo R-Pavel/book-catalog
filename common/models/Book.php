@@ -10,7 +10,7 @@ class Book extends ActiveRecord
 {
     public static function tableName(): string
     {
-        return '{{book}}';
+        return '{{%book}}';
     }
 
     public function rules(): array
@@ -31,7 +31,7 @@ class Book extends ActiveRecord
     {
         return $this
             ->hasMany(Author::class, ['id' => 'author_id'])
-            ->viaTable('{{book_author}}', ['book_id' => 'id']);
+            ->viaTable('{{%book_author}}', ['book_id' => 'id']);
     }
 
 }
