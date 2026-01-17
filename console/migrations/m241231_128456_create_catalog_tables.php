@@ -28,6 +28,9 @@ class m241231_128456_create_catalog_tables extends Migration
             'book_id'   => $this->integer(),
             'author_id' => $this->integer(),
         ]);
+        $this->addPrimaryKey('pk_book_author', '{{%book_author}}', ['book_id', 'author_id']);
+        $this->addForeignKey('fk_book_author_book',   '{{%book_author}}', 'book_id',   '{{%book}}',   'id', 'CASCADE');
+        $this->addForeignKey('fk_book_author_author', '{{%book_author}}', 'author_id', '{{%author}}', 'id', 'CASCADE');
 
         $this->createTable('{{%subscription}}', [
             'id'         => $this->primaryKey(),
@@ -35,6 +38,7 @@ class m241231_128456_create_catalog_tables extends Migration
             'phone'      => $this->string(20),
             'created_at' => $this->integer(),
         ]);
+        $this->addForeignKey('fk_subscription_author', '{{%subscription}}', 'author_id', '{{%author}}', 'id', 'CASCADE');
     }
 
     public function down()
