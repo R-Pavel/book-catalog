@@ -13,9 +13,9 @@ class NotifyController extends Controller
     protected const string API_KEY_SMS_PILOT = 'XXXXXXXXXXXXXXXXXXXXXXX';
     protected const string URL_SMS_PILOT = "https://smspilot.ru/api.php";
 
-        /**
-        * php yii notify/send-new-books
-         */
+    /**
+    * php yii notify/send-new-books
+    */
     public function actionSendNewBooks(): void
     {
         $newBooks = Book::find()
