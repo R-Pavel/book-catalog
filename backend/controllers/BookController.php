@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace backend\controllers;
 
 use common\models\Author;
@@ -13,6 +15,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
+use yii\web\Response;
 
 class BookController extends Controller
 {
@@ -30,7 +33,7 @@ class BookController extends Controller
                     [
                         'actions' => ['create', 'update', 'delete'],
                         'allow' => true,
-                        'roles' => '@',// logged in user
+                        'roles' => '@',// only logged user
                     ]
                 ]
             ]
@@ -51,7 +54,7 @@ class BookController extends Controller
         return $this->render('view', ['model' => $this->findModel($id)]);
     }
 
-    public function actionCreate()
+    public function actionCreate(): string|Response
     {
         $model = new Book();
 
@@ -87,7 +90,7 @@ class BookController extends Controller
      * @throws Exception
      * @throws NotFoundHttpException
      */
-    public function actionUpdate(int $id)
+    public function actionUpdate(int $id): string|Response
     {
         $model = $this->findModel($id);
 
@@ -123,13 +126,13 @@ class BookController extends Controller
      * @throws StaleObjectException
      * @throws NotFoundHttpException
      */
-    public function actionDelete(int $id)
+    public function actionDelete(int $id): Response
     {
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
 
-    public function actionReport()
+    public function actionReport(): string
     {
         $year = Yii::$app->request->get('year', date('Y'));
 
